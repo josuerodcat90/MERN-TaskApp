@@ -1,2 +1,3 @@
-# expressjs-server-starter
-A simple starter pack of expressjs server structure.
+# MERN Task App
+
+A simple CRUD in Task App example with MERN Stack.s
