@@ -1,23 +1,38 @@
 const usersCrtl = {};
 
-usersCrtl.getUsers = (req, res) => {
-	res.json({ message: 'GET - Users Routes!' });
+const User = require('../models/User');
+
+usersCrtl.getUsers = async (req, res) => {
+	const users = await User.find();
+	res.json(users);
 };
 
-usersCrtl.createUser = (req, res) => {
-	res.json({ message: 'POST - Users Routes!' });
+usersCrtl.createUser = async (req, res) => {
+	const { username } = req.body;
+	const newUser = new User({ username });
+	await newUser.save();
+	res.json({ message: 'User Created!' });
 };
 
-usersCrtl.getUser = (req, res) => {
-	res.json({ message: 'GET - User Request!' });
+usersCrtl.getUser = async (req, res) => {
+	const user = await User.findById(req.params.id);
+	res.json(user);
 };
 
-usersCrtl.updateUser = (req, res) => {
-	res.json({ message: 'PUT - User Updated!' });
+usersCrtl.updateUser = async (req, res) => {
+	const { username } = rq.body;
+	await User.findOneAndUpdate(
+		{ id: req.params.id },
+		{
+			username
+		}
+	);
+	res.json({ message: 'User Updated!' });
 };
 
-usersCrtl.deleteUser = (req, res) => {
-	res.json({ message: 'DELETE - User Deleted!' });
+usersCrtl.deleteUser = async (req, res) => {
+	await User.findOneAndDelete(req.params.id);
+	res.json({ message: 'User Deleted!' });
 };
 
 module.exports = usersCrtl;

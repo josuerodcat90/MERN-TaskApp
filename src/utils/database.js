@@ -1,7 +1,7 @@
 const mongosse = require('mongoose');
 
 ///define URI constant
-const URI = process.env.URI || 'mongodb://localhost:27017/test';
+const URI = process.env.DB_URI || 'mongodb://localhost:27017/test';
 
 ///conect to DB
 mongosse.connect(URI, {
