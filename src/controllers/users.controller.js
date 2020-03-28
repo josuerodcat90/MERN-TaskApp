@@ -21,17 +21,14 @@ usersCrtl.getUser = async (req, res) => {
 
 usersCrtl.updateUser = async (req, res) => {
 	const { username } = rq.body;
-	await User.findOneAndUpdate(
-		{ id: req.params.id },
-		{
-			username
-		}
-	);
+	await User.findByIdAndUpdate(req.params.id, {
+		username
+	});
 	res.json({ message: 'User Updated!' });
 };
 
 usersCrtl.deleteUser = async (req, res) => {
-	await User.findOneAndDelete(req.params.id);
+	await User.findByIdAndDelete(req.params.id);
 	res.json({ message: 'User Deleted!' });
 };
 
