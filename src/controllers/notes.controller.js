@@ -27,19 +27,16 @@ notesCrtl.getNote = async (req, res) => {
 
 notesCrtl.updateNote = async (req, res) => {
 	const { title, content, author } = req.body;
-	await Note.findOneAndUpdate(
-		{ id: req.params.id },
-		{
-			title,
-			content,
-			author
-		}
-	);
+	await Note.findByIdAndUpdate(req.params.id, {
+		title,
+		content,
+		author
+	});
 	res.json({ message: 'Note Updated!' });
 };
 
 notesCrtl.deleteNote = async (req, res) => {
-	await Note.findOneAndDelete(req.params.id);
+	await Note.findByIdAndDelete(req.params.id);
 	res.json({ message: 'Note Deleted!' });
 };
 
